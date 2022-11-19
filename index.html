@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Dashboard</title>
+    <!--style links here-->
+    <link rel="stylesheet" href="./assets/reset.css" />
+    <link rel="stylesheet" href="./assets/style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+    <main>
+        <aside>
+            <div id="search" class="aside-elements">
+                <h2> Search For City </h2>
+                <input></input>
+                <button>Search</button>
+            </div>
+            <div id="history" class="aside-elements">
+                <ul id="search-history"></ul>
+            </div>
+        </aside>
+        <section id="results">
+            <div id="current" class="forecast">
+                <h2></h2>
+            </div>
+            <div id="fiveday" class="forecast">
+                <h3>5-Day Forecast:</h3>
+                <div id="fiveblocks">
+                <div id="day1" class="fivedayfore"></div>
+                <div id="day2" class="fivedayfore"></div>
+                <div id="day3" class="fivedayfore"></div>
+                <div id="day4" class="fivedayfore"></div>
+                <div id="day5" class="fivedayfore"></div>
+            </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- script links here-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+    <script src="./assets/script.js"></script>
+</body>
+
+</html>

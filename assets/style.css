@@ -1,0 +1,48 @@
+body{
+    margin: 0;
+}
+header {
+    width: 100%;
+    background-color: blueviolet;
+    color: whitesmoke;
+    text-align: center;
+    line-height: 4rem;
+    font-size: 2rem;
+}
+main{
+    display: flex;
+}
+aside{
+    padding: 20px;
+    clear: both;
+    float: left;
+    width: 25%;
+    height: 100%;
+    background-color: lightblue;
+    text-align: center;
+    line-height: 2;
+}
+#results {
+    width: 70%;
+    display: inline-block;
+    margin: 5px;
+}
+.forecast{
+  margin: 8px;
+}
+#current{
+    border: 1px solid black;
+    min-height: 100px;
+}
+.fivedayfore{
+    display: inline-block;
+    width: 17%;
+    height: 200px;
+    margin: 1%;
+    object-fit: cover;
+    background-color: #093145;
+    text-align: center;
+}
+#day1{
+    margin-left: 0;
+}
