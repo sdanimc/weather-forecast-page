@@ -1,4 +1,6 @@
 //globally declared variables
+var today = dayjs();
+var currentTitle = document.getElementById('citydate');
 var userInput;
 var searchBtn = document.getElementById('searchBtn')
 //apikeyw can be used for both geocoding and getting weather info
@@ -19,30 +21,41 @@ function search() {
         })
         .then(function (data) {
             console.log(data);
-            if (!data[0]) { alert('This city is not in our database. Please try again') };
-            var lat = data[0].lat;
-            var lon = data[0].lon;
-            getWeather(lat, lon);
+            if (!data[0]) {
+                alert('This city is not in our database. Please try again');
+            } else {
+                var lat = data[0].lat;
+                var lon = data[0].lon;
+                //add to search history here
+                getWeather(lat, lon);
+            };
         });
     function getWeather(lat, lon) {
+        var todayDate = today.format('MM/DD/YYYY');
+        currentTitle.textContent= userInput + " " + todayDate;
+        //display city name and date
         var requestURLwet = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIkeyW;
         fetch(requestURLwet)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);});
-        /*
-         add to search history and run display function
-         may have to run display data inside this function to reference data
-        */
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                console.log(data);
+                //current weather
+                //temperature data is in kelvin 
+                var tempK = parseInt(data.list[0].main.temp);
+                //convert to F
+                var tempF = 1.8 * (tempK - 273) + 32;
+                //need to add display functions
+                //five day forecast display for loop, need to add ids in html
+                //need to add temp wind and humidity both here and in html
+                for (i=1; i<6; i+=1){
+                    var title = document.getElementById("day"+i+"date");
+                    title.textContent = today.add(i,'d').format('MM/DD/YYYY');
+                };
+            });
     };
-}
-function displayData() {
-    /* get current and next 5 dates
-function? display current date and conditions
-for each fivedayfore display date temp wind and display*/
-}
+};
 
 //event listeners
 //event listener for search history btns with function that sets user input to btn text and runs search
