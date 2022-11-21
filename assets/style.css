@@ -3,7 +3,9 @@ body{
 }
 h4{
     padding: 4px;
-    color: whitesmoke;
+}
+img{
+    display: none;
 }
 #current{
     padding: 7px;
@@ -30,6 +32,9 @@ aside{
     text-align: center;
     line-height: 2;
 }
+input{
+    max-width: 100%;
+}
 #results {
     width: 70%;
     display: inline-block;
@@ -45,11 +50,13 @@ aside{
 .fivedayfore{
     display: inline-block;
     width: 17%;
-    height: 200px;
+    min-height: 200px;
     margin: 1%;
     object-fit: cover;
     background-color: #093145;
     text-align: center;
+    color: whitesmoke;
+    line-height: 1.2rem;
 }
 #day1{
     margin-left: 0;
