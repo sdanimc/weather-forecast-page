@@ -7,13 +7,48 @@ var searchBtn = document.getElementById('searchBtn');
 var currentTemp = document.getElementById('temp');
 var currentWind = document.getElementById('wind');
 var currentHumid = document.getElementById('humid');
+var searchHistory = [];
+var ulHistory = document.getElementById('search-history');
 //apikeyw can be used for both geocoding and getting weather info
 var APIkeyW = "e62d64be9b5b8baedff8301f0d55e47f";
 
 //functions
+function loadSearch() {
+//var ulHistory = document.getElementById('search-history');
+if (ulHistory.childElementCount !== 0) {
+    function deleteChild() {
+        var first = ulHistory.firstElementChild
+        while (first) {
+            first.remove();
+            first = ulHistory.firstElementChild;
+        }
+    }
+    deleteChild();
+};
+for(i=0; i< searchHistory.length; i+= 1){
+    var historyBtn = document.createElement('button');
+    historyBtn.textContent = searchHistory[i];
+    historyBtn.className = "prevSearchBtn";
+    ulHistory.appendChild(historyBtn);
+}
+};
+function saveSearch() {
+var currentSearch = userInput.toUpperCase();
+if (searchHistory.includes(currentSearch)){
+    return;}else{
+        searchHistory.push(currentSearch);
+        window.localStorage.setItem('searchHistory',JSON.stringify(searchHistory));
+        loadSearch();
+    };
+};
+function clearHistory() {
+    searchHistory =[];
+    window.localStorage.removeItem('searchHistory');
+    loadSearch();
+};
+
 function getUserInput() {
     userInput = document.getElementById('input').value;
-    console.log(userInput);
     search();
 };
 function search() {
@@ -30,14 +65,15 @@ function search() {
             } else {
                 var lat = data[0].lat;
                 var lon = data[0].lon;
-                //add to search history here
                 getWeather(lat, lon);
+                saveSearch();
             };
         });
     function getWeather(lat, lon) {
         //display city and date
         var todayDate = today.format('MM/DD/YYYY');
-        currentTitle.textContent = userInput + " " + todayDate;
+        var resultsTitle = userInput.toUpperCase();
+        currentTitle.textContent = resultsTitle + " " + todayDate;
         //get and display weather data
         var requestURLwet = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIkeyW;
         fetch(requestURLwet)
@@ -60,13 +96,15 @@ function search() {
                 currentIcon.setAttribute('src', 'http://openweathermap.org/img/wn/' + currentIconID + '@2x.png');
                 //five day forecast display
                 for (i = 1; i < 6; i += 1) {
-                    //add function to change img src for icons and unhide them
+                    //add function to change img src for icons
                     var nextIcon = document.getElementById('icon' + i);
                     var nexticonID = data.list[i].weather[0].icon;
                     nextIcon.style.display = "inline-block";
                     nextIcon.setAttribute('src', 'http://openweathermap.org/img/wn/' + nexticonID + '@2x.png');
+                    //date display
                     var title = document.getElementById("day" + i + "date");
                     title.textContent = today.add(i, 'd').format('MM/DD/YYYY');
+                    //get and display forecasted weather conditions
                     var futureTemp = document.getElementById("day" + i + "temp");
                     var nextTempK = parseInt(data.list[i].main.temp);
                     var nextTempF = 1.8 * (nextTempK - 273) + 32;
@@ -77,11 +115,19 @@ function search() {
                     futureHumid.textContent = data.list[i].main.humidity;
                 };
             });
+           
     };
+   
 };
 
 //event listeners
-//event listener for search history btns with function that sets user input to btn text and runs search
 searchBtn.addEventListener('click', getUserInput);
 //lets pressing enter trigger search functions
 inputField.addEventListener('keypress', function (event) { if (event.key === "Enter") { getUserInput(); } });
+//search history btns
+//var ulHistory = document.getElementById('search-history');
+ulHistory.addEventListener('click', function(event){ 
+    userInput = event.target.innerHTML;
+    search();
+});
+document.getElementById("clearHistory").onclick = clearHistory;
