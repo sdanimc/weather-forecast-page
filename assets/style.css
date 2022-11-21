@@ -1,16 +1,9 @@
-body{
+/*Page Selectors*/
+body {
     margin: 0;
 }
-h4{
-    padding: 4px;
-}
-img{
-    display: none;
-}
-#current{
-    padding: 7px;
-    line-height: 1.3rem;
-}
+
+/*Header*/
 header {
     width: 100%;
     background-color: #093145;
@@ -19,10 +12,14 @@ header {
     line-height: 4rem;
     font-size: 2rem;
 }
-main{
+
+/*Main Content*/
+main {
     display: flex;
 }
-aside{
+
+/*search section*/
+aside {
     padding: 20px;
     clear: both;
     float: left;
@@ -32,32 +29,52 @@ aside{
     text-align: center;
     line-height: 2;
 }
-input{
+
+input {
     max-width: 100%;
     padding: 1px;
 }
-button{
+
+button {
     margin: 4px;
     padding: 1.5px;
     background-color: #093145;
     color: whitesmoke;
 }
-.prevSearchBtn{
+
+.prevSearchBtn {
     width: 100%;
 }
+
+/*Forecast Sections*/
 #results {
     width: 70%;
     display: inline-block;
     margin: 5px;
 }
-.forecast{
-  margin: 8px;
+
+.forecast {
+    margin: 8px;
 }
-#current{
+
+h4 {
+    padding: 4px;
+}
+
+img {
+    display: none;
+}
+
+/*Current Condition Section*/
+#current {
     border: 1px solid black;
     min-height: 100px;
+    padding: 7px;
+    line-height: 1.3rem;
 }
-.fivedayfore{
+
+/*Five day forecast*/
+.fivedayfore {
     display: inline-block;
     width: 17%;
     min-height: 200px;
@@ -69,6 +86,7 @@ button{
     line-height: 1.2rem;
     padding: 2px;
 }
-#day1{
+
+#day1 {
     margin-left: 0;
 }
