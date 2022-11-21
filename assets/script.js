@@ -2,7 +2,10 @@
 var today = dayjs();
 var currentTitle = document.getElementById('citydate');
 var userInput;
-var searchBtn = document.getElementById('searchBtn')
+var searchBtn = document.getElementById('searchBtn');
+var currentTemp = document.getElementById('temp');
+var currentWind = document.getElementById('wind');
+var currentHumid = document.getElementById('humid');
 //apikeyw can be used for both geocoding and getting weather info
 var APIkeyW = "e62d64be9b5b8baedff8301f0d55e47f";
 
@@ -31,9 +34,10 @@ function search() {
             };
         });
     function getWeather(lat, lon) {
+        //display city and date
         var todayDate = today.format('MM/DD/YYYY');
         currentTitle.textContent= userInput + " " + todayDate;
-        //display city name and date
+        //get and display weather data
         var requestURLwet = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIkeyW;
         fetch(requestURLwet)
             .then(function (response) {
@@ -46,7 +50,9 @@ function search() {
                 var tempK = parseInt(data.list[0].main.temp);
                 //convert to F
                 var tempF = 1.8 * (tempK - 273) + 32;
-                //need to add display functions
+                currentTemp.textContent= tempF;
+                currentHumid.textContent = data.list[0].main.humidity;
+                currentWind.textContent = data.list[0].wind.speed;
                 //five day forecast display for loop, need to add ids in html
                 //need to add temp wind and humidity both here and in html
                 for (i=1; i<6; i+=1){

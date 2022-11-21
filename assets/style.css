@@ -1,6 +1,14 @@
 body{
     margin: 0;
 }
+h4{
+    padding: 4px;
+    color: whitesmoke;
+}
+#current{
+    padding: 7px;
+    line-height: 1.3rem;
+}
 header {
     width: 100%;
     background-color: #093145;
