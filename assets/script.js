@@ -13,8 +13,8 @@ var ulHistory = document.getElementById('search-history');
 var APIkeyW = "e62d64be9b5b8baedff8301f0d55e47f";
 
 //functions
+//search history functions
 function loadSearch() {
-//var ulHistory = document.getElementById('search-history');
 if (ulHistory.childElementCount !== 0) {
     function deleteChild() {
         var first = ulHistory.firstElementChild
@@ -46,7 +46,7 @@ function clearHistory() {
     window.localStorage.removeItem('searchHistory');
     loadSearch();
 };
-
+//search functions
 function getUserInput() {
     userInput = document.getElementById('input').value;
     search();
@@ -81,22 +81,23 @@ function search() {
                 return response.json();
             })
             .then(function (data) {
-                console.log(data);
                 //current weather
                 //temperature data is in kelvin 
                 var tempK = parseInt(data.list[0].main.temp);
                 //convert to F
                 var tempF = 1.8 * (tempK - 273) + 32;
+                //dispaly data
                 currentTemp.textContent = tempF;
                 currentHumid.textContent = data.list[0].main.humidity;
                 currentWind.textContent = data.list[0].wind.speed;
+                //icon
                 var currentIcon = document.getElementById('currenticon');
                 var currentIconID = data.list[0].weather[0].icon;
                 currentIcon.style.display = "inline-block";
                 currentIcon.setAttribute('src', 'http://openweathermap.org/img/wn/' + currentIconID + '@2x.png');
                 //five day forecast display
                 for (i = 1; i < 6; i += 1) {
-                    //add function to change img src for icons
+                    //icon 
                     var nextIcon = document.getElementById('icon' + i);
                     var nexticonID = data.list[i].weather[0].icon;
                     nextIcon.style.display = "inline-block";
@@ -121,11 +122,11 @@ function search() {
 };
 
 //event listeners
+//search btns
 searchBtn.addEventListener('click', getUserInput);
 //lets pressing enter trigger search functions
 inputField.addEventListener('keypress', function (event) { if (event.key === "Enter") { getUserInput(); } });
 //search history btns
-//var ulHistory = document.getElementById('search-history');
 ulHistory.addEventListener('click', function(event){ 
     userInput = event.target.innerHTML;
     search();
