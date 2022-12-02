@@ -53,7 +53,7 @@ function getUserInput() {
 };
 function search() {
     //convert userInput to lat and lon with geocoding api
-    var requestURLgeo = 'http://api.openweathermap.org/geo/1.0/direct?q=' + userInput + '&limit=1&appid=' + APIkeyW;
+    var requestURLgeo = 'https://api.openweathermap.org/geo/1.0/direct?q=' + userInput + '&limit=1&appid=' + APIkeyW;
     fetch(requestURLgeo)
         .then(function (response) {
             return response.json();
