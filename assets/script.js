@@ -94,14 +94,14 @@ function search() {
                 var currentIcon = document.getElementById('currenticon');
                 var currentIconID = data.list[0].weather[0].icon;
                 currentIcon.style.display = "inline-block";
-                currentIcon.setAttribute('src', 'http://openweathermap.org/img/wn/' + currentIconID + '@2x.png');
+                currentIcon.setAttribute('src', 'https://openweathermap.org/img/wn/' + currentIconID + '@2x.png');
                 //five day forecast display
                 for (i = 1; i < 6; i += 1) {
                     //icon 
                     var nextIcon = document.getElementById('icon' + i);
                     var nexticonID = data.list[i].weather[0].icon;
                     nextIcon.style.display = "inline-block";
-                    nextIcon.setAttribute('src', 'http://openweathermap.org/img/wn/' + nexticonID + '@2x.png');
+                    nextIcon.setAttribute('src', 'https://openweathermap.org/img/wn/' + nexticonID + '@2x.png');
                     //date display
                     var title = document.getElementById("day" + i + "date");
                     title.textContent = today.add(i, 'd').format('MM/DD/YYYY');
